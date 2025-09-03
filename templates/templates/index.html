@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Spam Classifier</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: darkblue;
+        }
+        a {
+            color: blue;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid blue;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        a:hover {
+            background-color: lightblue;
+        }
+        textarea {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+        .spam {
+            background-color: #ffcccc;
+            color: #cc0000;
+        }
+        .ham {
+            background-color: #ccffcc;
+            color: #006600;
+        }
+    </style>
+</head>
+<body>
+    <h1>Email Spam Classifier</h1>
+    <form method="POST" action="/predict">
+        <textarea name="email-content" placeholder="Enter your email here" rows="12" cols="60">{{text}}</textarea>
+        <br>
+        <button type="submit">Check spam</button>
+        <a href="/">Reset</a>
+    </form>
+    
+    {% if prediction is not none %}
+    <div class="result {{'spam' if prediction == 1 else 'ham'}}">
+        <h2>This email is {{'SPAM' if prediction == 1 else 'NOT SPAM'}}</h2>
+    </div>
+    {% endif %}
+</body>
+</html>
